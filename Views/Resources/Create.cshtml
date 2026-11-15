@@ -1,0 +1,9 @@
+@model ResourceInput
+@{ ViewData["Title"] = "Upload resource"; }
+<div class="form-shell"><div class="eyebrow">KNOWLEDGE SHARING</div><h1>Upload a resource</h1><form method="post" enctype="multipart/form-data"><div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<label class="form-label" asp-for="Title"></label><input asp-for="Title" class="form-control mb-3"/>
+<label class="form-label" asp-for="Subject"></label><input asp-for="Subject" class="form-control mb-3"/>
+<label class="form-label" asp-for="Department"></label><input asp-for="Department" class="form-control mb-3"/>
+<label class="form-label" asp-for="Description"></label><textarea asp-for="Description" class="form-control mb-3"></textarea>
+<label class="form-label">File (PDF, DOC, DOCX, PPT, PPTX; max 10 MB)</label><input asp-for="File" type="file" class="form-control mb-3"/>
+<button class="btn btn-primary">Upload resource</button> <a asp-action="Index" class="btn btn-light">Cancel</a></form></div>

@@ -1,0 +1,7 @@
+@model PostInput
+@{ ViewData["Title"] = "Create post"; }
+<div class="form-shell"><div class="eyebrow">START A CONVERSATION</div><h1>Create a post</h1><form method="post"><div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<label asp-for="Title" class="form-label">Title</label><input asp-for="Title" class="form-control mb-3"/><span asp-validation-for="Title" class="text-danger"></span>
+<label asp-for="Category" class="form-label">Category</label><select asp-for="Category" class="form-select mb-3"><option>Discussion</option><option>Question</option><option>Achievement</option><option>Opportunity</option></select>
+<label asp-for="Body" class="form-label">What's on your mind?</label><textarea asp-for="Body" class="form-control mb-3" rows="6"></textarea><span asp-validation-for="Body" class="text-danger"></span>
+<button class="btn btn-primary">Publish post</button> <a asp-action="Index" class="btn btn-light">Cancel</a></form></div>

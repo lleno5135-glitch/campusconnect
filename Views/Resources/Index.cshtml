@@ -1,0 +1,6 @@
+@model IEnumerable<StudyResource>
+@{ ViewData["Title"] = "Study resources"; }
+<div class="page-head"><div><div class="eyebrow">SHARE KNOWLEDGE</div><h1>Study resources</h1><p>Notes, presentations and useful study material.</p></div><a class="btn btn-primary" asp-action="Create">＋ Upload resource</a></div>
+<form class="searchbar mb-4"><input name="q" value="@ViewBag.Query" placeholder="Search title or subject..."/><button class="btn btn-dark">Search</button></form>
+<div class="row g-3">@foreach(var r in Model) { <div class="col-md-6"><div class="content-card h-100"><div class="file-icon">PDF</div><span class="pill">@r.Subject</span><h5 class="mt-3">@r.Title</h5><p class="muted">@r.Description</p><small class="muted d-block mb-3">@r.Department · Shared by @r.AuthorName</small><a class="btn btn-outline-primary btn-sm" asp-action="Download" asp-route-id="@r.Id">Download file ↓</a></div></div> }</div>
+@if(!Model.Any()) { <div class="empty-card">No resources yet. Share the first one.</div> }

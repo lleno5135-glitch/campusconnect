@@ -1,0 +1,6 @@
+@model IEnumerable<LostFoundItem>
+@{ ViewData["Title"] = "Lost & Found"; }
+<div class="page-head"><div><div class="eyebrow">HELP IT FIND ITS WAY</div><h1>Lost & Found</h1><p>Report an item or help reunite someone with theirs.</p></div><a class="btn btn-primary" asp-action="Create">＋ Report item</a></div>
+<div class="mb-3 d-flex gap-2"><a class="btn btn-sm btn-light" asp-action="Index">All</a><a class="btn btn-sm btn-light" asp-route-status="Lost">Lost</a><a class="btn btn-sm btn-light" asp-route-status="Found">Found</a></div>
+<div class="row g-3">@foreach(var x in Model) { <div class="col-md-6"><div class="content-card"><span class="pill">@x.Status</span><h5 class="mt-3">@x.ItemName</h5><p>@x.Details</p><small class="muted d-block">📍 @x.Location · Reported by @x.ReporterName</small><a class="small" href="mailto:@x.ContactInfo">Contact reporter: @x.ContactInfo</a></div></div> }</div>
+@if(!Model.Any()) { <div class="empty-card">No matching reports yet.</div> }

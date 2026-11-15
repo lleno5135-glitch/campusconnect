@@ -1,0 +1,32 @@
+@{ ViewData["Title"] = "Your campus, connected"; var posts = ViewBag.Posts as List<CampusPost> ?? new(); var events = ViewBag.Events as List<CampusEvent> ?? new(); var notices = ViewBag.Announcements as List<Announcement> ?? new(); }
+<section class="hero-panel mb-4">
+ <div class="hero-copy">
+  <div class="eyebrow">THE CAMPUS COMMUNITY PLATFORM</div>
+  <h1>Make campus life<br><span>more connected.</span></h1>
+  <p>Find your people, share what you know, discover opportunities and make every campus moment count.</p>
+  <div class="d-flex gap-2 flex-wrap"><a class="btn btn-primary btn-lg" asp-controller="Community" asp-action="Index">Explore community <span>→</span></a><a class="btn btn-outline-light btn-lg" asp-controller="Teams" asp-action="Index">Find a team</a></div>
+ </div>
+ <div class="hero-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-core">CC</div><div class="float-card card-a">✦ &nbsp; Learn together</div><div class="float-card card-b">↗ &nbsp; Build something</div><div class="float-card card-c">♡ &nbsp; Belong here</div></div>
+</section>
+<div class="row g-3 mb-4">
+ <div class="col-6 col-lg-3"><div class="stat-card"><span>Community posts</span><strong>@posts.Count</strong><small>Fresh conversations</small></div></div>
+ <div class="col-6 col-lg-3"><div class="stat-card"><span>Study resources</span><strong>@ViewBag.ResourcesCount</strong><small>Shared knowledge</small></div></div>
+ <div class="col-6 col-lg-3"><div class="stat-card"><span>Project teams</span><strong>@ViewBag.TeamCount</strong><small>Ideas in progress</small></div></div>
+ <div class="col-6 col-lg-3"><div class="stat-card"><span>Upcoming events</span><strong>@events.Count</strong><small>Things to look forward to</small></div></div>
+</div>
+<div class="row g-4">
+ <div class="col-lg-7">
+  <div class="section-heading"><div><div class="eyebrow">WHAT'S HAPPENING</div><h2>Campus conversations</h2></div><a asp-controller="Community" asp-action="Index">View all →</a></div>
+  @foreach(var p in posts) { <article class="content-card mb-3"><div class="d-flex justify-content-between"><span class="pill">@p.Category</span><small class="muted">@p.CreatedAt.ToLocalTime().ToString("dd MMM")</small></div><h5 class="mt-3">@p.Title</h5><p class="mb-2">@p.Body</p><small class="muted">Posted by @p.AuthorName · @p.Likes likes</small></article> }
+  @if(posts.Count == 0) { <div class="empty-card">No conversations yet. Be the first to start one!</div> }
+ </div>
+ <div class="col-lg-5">
+  <div class="section-heading"><div><div class="eyebrow">SAVE THE DATE</div><h2>Upcoming events</h2></div><a asp-controller="Events" asp-action="Index">View all →</a></div>
+  @foreach(var e in events) { <div class="event-card mb-3"><div class="date-tile"><b>@e.StartsAt.ToString("dd")</b><span>@e.StartsAt.ToString("MMM")</span></div><div><h6>@e.Title</h6><small class="muted">@e.StartsAt.ToString("h:mm tt") · @e.Venue</small></div></div> }
+  @if(events.Count == 0) { <div class="empty-card mb-3">No upcoming events listed.</div> }
+  <div class="recommend-card"><div class="eyebrow">SMART PICKS</div><h5>Picked around your interests</h5><p class="muted mb-2">Local recommendations based on your profile interests.</p>
+  @foreach(var name in (ViewBag.RecommendedEvents as List<string> ?? new())) { <div class="recommend-item">✦ @name</div> }
+  <a asp-controller="Profile" asp-action="Index" class="small">Update my interests →</a></div>
+  @if(notices.Count > 0) { <div class="content-card mt-3"><div class="eyebrow">CAMPUS NOTICEBOARD</div>@foreach(var n in notices) { <div class="notice-item"><b>@n.Title</b><p class="mb-0 small muted">@n.Message</p></div> }</div> }
+ </div>
+</div>
